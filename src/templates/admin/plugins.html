@@ -1,0 +1,97 @@
+<!doctype html> 
+<html>
+  <head>
+    <title>Plugin manager - Etherpad</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <script src="../static/js/jquery.js"></script>
+    <script src="../socket.io/socket.io.js"></script>
+    <script src="../static/js/admin/plugins.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <% if (errors.length) { %>
+        <div class="errors">
+          <% errors.forEach(function (item) { %>
+            <div class="error"><%= item.toString() %></div>
+          <% }) %>
+        </div>
+      <% } %>
+
+       <div class="menu">
+        <h1>Etherpad</h1>
+        <ul> 
+          <% e.begin_block("adminMenu"); %>
+          <li><a href="plugins">Plugin manager</a> </li>
+          <li><a href="settings">Settings</a> </li>
+          <li><a href="plugins/info">Troubleshooting information</a> </li>
+          <% e.end_block(); %>
+        </ul>
+        <div id="progress"><img src="../static/img/loading.gif">&nbsp;&nbsp;<span class="message"></span></div>
+      </div>
+
+      <div class="innerwrapper">
+      <h2>Installed plugins</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Version</th>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody class="template">
+          <tr id="installed-plugin-template">
+            <td class="name" data-label="Name"></td>
+            <td class="description" data-label="Description"></td>
+            <td class="version" data-label="Version"></td>
+            <td class="actions">
+              <input type="button" value="Uninstall" class="do-uninstall">
+            </td>
+          </tr>
+        </tbody>
+        <tbody id="installed-plugins">
+        </tbody>
+      </table>
+
+      <div class="paged listing search-results">
+        <div class="separator"></div>
+        
+        <h2>Available plugins</h2>
+        <form>
+          <input type="text" name="search" placeholder="Search for plugins to install" id="search-query">
+        </form>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Version</th>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody class="template">
+            <tr>
+              <td class="name" data-label="Name"></td>
+              <td class="description" data-label="Description"></td>
+              <td class="version" data-label="Version"></td>
+              <td class="actions">
+                <input type="button" value="Install" class="do-install">
+             </td>
+            </tr>
+          </tbody>
+          <tbody class="results">
+          </tbody>
+        </table>
+        <input type="button" value="<<" class="do-prev-page">
+        <span class="offset"></span>..<span class="limit"></span> of <span class="total"></span>.
+        <input type="button" value=">>" class="do-next-page">
+      </div>
+      
+      </div>
+    </div>
+  </body>
+</html>
